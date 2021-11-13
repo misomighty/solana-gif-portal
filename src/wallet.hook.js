@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-const checkForWallet = async (setAddress) => {
+const checkForWallet = async () => {
     try {
         const { solana } = window;
 
         if(solana && solana.isPhantom) {
 
             const response = await solana.connect();
-            setAddress(response.publicKey.toString())
+            return response.publicKey.toString();
 
         } else {
             alert('Solana object not found! Get a Phantom Wallet 👻')
@@ -22,7 +22,8 @@ const useWallet = () => {
 
     useEffect(() => {
         const onLoad = async () => {
-            await checkForWallet(setWalletAddress);
+            const address = await checkForWallet();
+            setWalletAddress(address)
         };
         window.addEventListener('load', onLoad);
         return () => window.removeEventListener('load', onLoad);
