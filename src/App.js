@@ -7,9 +7,9 @@ import { ConnectedContainer } from './components/ConnectedContainer.component'
 const TWITTER_HANDLE = "misomighty";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
+
 const App = () => {
   const { walletAddress, connectWallet } = useWallet();
-
   return (
     <div className="App">
       <div className={walletAddress ? "authed-container" : "container"}>
@@ -27,7 +27,7 @@ const App = () => {
             </button>
           )}
           {walletAddress && (
-            <ConnectedContainer />
+            <ConnectedContainer walletAddress={walletAddress}  />
           )}
         </div>
         <div className="footer-container">
