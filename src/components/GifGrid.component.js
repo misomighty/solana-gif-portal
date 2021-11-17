@@ -5,7 +5,8 @@ const GifGrid = ({ gifs }) => {
       <div className="gif-grid">
         {gifs && gifs.map((gif, index) => (
           <div className="gif-item" key={index}>
-            <img src={gif} alt={gif} />
+            <img src={gif.gifLink} alt={gif} />
+            <p>{gif.userAddress}</p>
           </div>
         ))}
       </div>

@@ -1,19 +1,26 @@
 import React from "react";
 
-const Input = ({ inputValue, setValue }) => {
+const Input = ({ inputValue, setValue, setList, sendGif, getGifList }) => {
   const onInputChange = (event) => setValue(event.target.value);
-  const sendGif = async () => {
-    if (inputValue.length > 0) {
-      console.log('Gif link:', inputValue);
-    } else {
-      console.log('Empty input. Try again.');
+  // const { getGifList, sendGif } = useAccountHook()
+  const onSubmit = async () => {
+    if (inputValue.length === 0) {
+      console.log("No gif link given!")
+      return
+    }
+    console.log('Gif link:', inputValue);
+    try {
+      sendGif(inputValue);
+      await getGifList().then(res => setList(res));
+    } catch (error) {
+      console.log("Error sending GIF:", error)
     }
   };
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        sendGif();
+        onSubmit();
       }}
     >
       <input
